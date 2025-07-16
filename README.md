@@ -37,7 +37,7 @@ Aşağıda ileride projeye eklenecek başlıca domain entity'leri listelenmişti
 - `OrderItem`: Siparişteki ürün satırları
 
 ### 👤 Kullanıcı Entity'si
-- `User`: Müşteri ya da sistem kullanıcı bilgisi
+- `Customer`: Müşteri ya da sistem kullanıcı bilgisi
 
 ---
 
