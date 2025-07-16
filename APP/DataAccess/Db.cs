@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace APP.DataAccess
 {
-    internal class Db
+    public class Db : DbContext
     {
+        public DbSet<Product> Products { get; set; }
     }
 }
