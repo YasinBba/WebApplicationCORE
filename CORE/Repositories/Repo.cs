@@ -1,4 +1,5 @@
 ﻿using CORE.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CORE.Repositories
 {
