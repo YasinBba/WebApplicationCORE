@@ -1,13 +1,13 @@
 ﻿using CORE.Models;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace APP.Business.Models
 {
-    public class CategoryResponse: Response
+    public class CategoryResponse : Response
     {
-        [Required, StringLength(100, MinimumLength = 3)]
+        [DisplayName("Category Name")]
         public string Name { get; set; }
-        public string Description { get; set; }
 
+        public string Description { get; set; }
     }
 }

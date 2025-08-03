@@ -3,6 +3,7 @@ using APP.DataAccess;
 using CORE.Models;
 using CORE.Repositories;
 using CORE.Services;
+
 namespace APP.Business.Services
 {
     public class CategoryService : Service<Category, CategoryRequest, CategoryResponse>
@@ -10,6 +11,7 @@ namespace APP.Business.Services
         public CategoryService(RepoBase<Category> repo) : base(repo)
         {
         }
+
         public override Result<List<CategoryResponse>> GetList()
         {
             List<CategoryResponse> list = null;
@@ -54,7 +56,20 @@ namespace APP.Business.Services
 
         public override Result Create(CategoryRequest request)
         {
-            throw new NotImplementedException();
+            // Way 1:
+            //var entity = _repo.Query().SingleOrDefault(categoryEntity => categoryEntity.Name == request.Name);
+            //if (entity is not null)
+            //    return Error("Category with the same name exists!");
+            // Way 2:
+            if (_repo.Query().Any(categoryEntity => categoryEntity.Name.ToUpper() == request.Name.ToUpper().Trim()))
+                return Error("Category with the same name exists!");
+            var entity = new Category
+            {
+                Description = request.Description?.Trim(),
+                Name = request.Name?.Trim()
+            };
+            _repo.Create(entity);
+            return Success("Category created successfully.", entity.Id);
         }
 
         public override Result Update(CategoryRequest request)
@@ -68,4 +83,3 @@ namespace APP.Business.Services
         }
     }
 }
-    
