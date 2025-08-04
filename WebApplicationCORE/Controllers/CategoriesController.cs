@@ -3,7 +3,7 @@ using APP.DataAccess;
 using CORE.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ETrade.Controllers
+namespace WebApplicationCORE.Controllers
 {
     public class CategoriesController : Controller
     {
