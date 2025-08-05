@@ -5,47 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplicationCORE.Controllers
 {
-    public class CategoriesController : Controller
+    public class ProductsController : Controller
     {
-        private readonly Service<Category, CategoryRequest, CategoryResponse> _service;
+        private readonly Service<Product, ProductRequest, ProductResponse> _service;
 
-        public CategoriesController(Service<Category, CategoryRequest, CategoryResponse> service)
+        public ProductsController(Service<Product, ProductRequest, ProductResponse> service)
         {
             _service = service;
         }
 
-        // GET: Categories/Index
-        // GET: Categories
         public IActionResult Index()
         {
             var result = _service.GetList();
-
+            
             // Way 1:
             //ViewData["RecordsCount"] = result.Message;
             // Way 2:
             ViewBag.RecordsCount = result.Message;
-
             return View(result.Data);
         }
-
-        // GET: Categories/Details/1
         public IActionResult Details(int id)
         {
             var result = _service.GetItem(id);
             ViewBag.Message = result.Message;
             return View(result.Data);
         }
-
-        // GET: Category/Create
-        //[HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(CategoryRequest request)
+        public IActionResult Create(ProductRequest request)
         {
             if (!ModelState.IsValid)
                 return View(request);
@@ -66,7 +57,7 @@ namespace WebApplicationCORE.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Edit(CategoryRequest request)
+        public IActionResult Edit(ProductRequest request)
         {
             if (!ModelState.IsValid)
                 return View(request);
@@ -79,5 +70,7 @@ namespace WebApplicationCORE.Controllers
             TempData["OperationMessage"] = result.Message;
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }
